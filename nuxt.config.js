@@ -1,11 +1,11 @@
 export default {
-  // loading: "~/components/Loading.vue",
+  loading: "~/components/Loading.vue",
   router: {
     extendRoutes(routes) {
       routes.push({
         path: "/",
-        component: "~/pages/education-content/"
-      })
+        component: "~/pages/dashboard/sales/index.vue"
+      });
     }
   },
   /*
@@ -42,18 +42,19 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    "~/plugins/axios.js",
+    "~/plugins/fireauth.js",
+    "~/plugins/fakeauth.js",
     "~/plugins/simplebar.js",
     "~/plugins/vue-click-outside.js",
     "~/plugins/vuelidate.js",
     "~/plugins/draggable.js",
     "~/plugins/vue-slidebar.js",
-    // "~/plugins/tour.js",
-    // "~/plugins/vue-lightbox.js",
-    // "~/plugins/mask.js",
-    // "~/plugins/quill-editor.js",
-    // "~/plugins/chartist.js",
-    // "~/plugins/vue-googlemap.js",
+    "~/plugins/tour.js",
+    "~/plugins/vue-lightbox.js",
+    "~/plugins/mask.js",
+    "~/plugins/quill-editor.js",
+    "~/plugins/chartist.js",
+    "~/plugins/vue-googlemap.js",
     "~/plugins/string-filter"
   ],
   /*
@@ -65,7 +66,6 @@ export default {
   ** Nuxt.js dev-modules
   */
   buildModules: [
-    '@nuxtjs/eslint-module'
   ],
   /*
   ** Nuxt.js modules
@@ -73,23 +73,8 @@ export default {
   modules: [
     // Doc: https://bootstrap-vue.js.org
     'bootstrap-vue/nuxt',
-    'nuxt-i18n',
-    '@nuxtjs/axios',
-    '@nuxtjs/auth-next',
+    'nuxt-i18n'
   ],
-
-  auth: {
-    strategies: {
-      'laravelSanctum': {
-        provider: 'laravel/sanctum',
-        url: process.env.VUE_APP_API_URL
-      },
-    }
-  },
-  axios: {
-    baseUrl: process.env.VUE_APP_API_URL,
-    credentials: true
-  },
   i18n: {
     locales: ['en', 'fr', 'es', 'ar'],
     defaultLocale: 'en',
@@ -103,9 +88,6 @@ export default {
         zh: require('./locales/zh.json')
       }
     }
-  },
-  redirect: {
-    home:"/"
   },
   /*
   ** Build configuration

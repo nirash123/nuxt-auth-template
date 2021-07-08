@@ -1,18 +1,3 @@
-<template>
-  <!-- Loader -->
-  <div
-    v-if="loading"
-    id="preloader"
-  >
-    <div class="card-portlets-loader">
-      <div
-        class="spinner-border text-primary m-2"
-        role="status"
-      />
-    </div>
-  </div>
-</template>
-
 <script>
 /**
  * Loading component
@@ -23,12 +8,20 @@ export default {
     }),
     methods: {
         start() {
-            this.loading = true
+            this.loading = true;
         },
         finish() {
-            this.loading = false
+            this.loading = false;
         }
     }
-}
+};
 </script>
 
+<template>
+<!-- Loader -->
+<div id="preloader" v-if="loading">
+    <div class="card-portlets-loader">
+        <div class="spinner-border text-primary m-2" role="status"></div>
+    </div>
+</div>
+</template>

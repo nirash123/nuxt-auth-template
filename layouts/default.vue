@@ -1,13 +1,12 @@
 <script>
 import {
     mapState
-} from "vuex"
+} from "vuex";
 
-import Vertical from "./vertical"
-import Horizontal from "./horizontal"
-import Detached from "./detached"
-import TwoColumn from "./two-column"
-
+import Vertical from "./vertical";
+import Horizontal from "./horizontal";
+import Detached from "./detached";
+import TwoColumn from "./two-column";
 
 /**
  * Default Layout
@@ -22,11 +21,6 @@ export default {
     data() {
         return {}
     },
-    async fetch() {
-      // console.log((await Organization.index()).data.data)
-      // console.log((await Organization.teams(1).index()).data.data)
-      // console.log((await Organization.teams(1).syncRole(3,{'asdsad':'asdasd'})).data.data)
-    },
     computed: mapState(["layout"]),
     mounted() {
         if (this.$route.query.layout) {
@@ -35,39 +29,27 @@ export default {
             })
         }
     }
-}
+};
 </script>
 
 <template>
-  <div>
+<div>
     <!-- Begin page -->
-    <Vertical
-      v-if="layout.layoutType === 'vertical'"
-      :layout="layout.layoutType"
-    >
-      <Nuxt />
+    <Vertical v-if="layout.layoutType === 'vertical'" :layout="layout.layoutType">
+        <Nuxt />
     </Vertical>
     <!-- END layout-wrapper -->
 
-    <Horizontal
-      v-if="layout.layoutType === 'horizontal'"
-      :layout="layout.layoutType"
-    >
-      <slot />
+    <Horizontal v-if="layout.layoutType === 'horizontal'" :layout="layout.layoutType">
+        <slot />
     </Horizontal>
 
-    <Detached
-      v-if="layout.layoutType === 'detached'"
-      :layout="layout.layoutType"
-    >
-      <slot />
+    <Detached v-if="layout.layoutType === 'detached'" :layout="layout.layoutType">
+        <slot />
     </Detached>
 
-    <TwoColumn
-      v-if="layout.layoutType === 'two-column'"
-      :layout="layout.layoutType"
-    >
-      <slot />
+    <TwoColumn v-if="layout.layoutType === 'two-column'" :layout="layout.layoutType">
+        <slot />
     </TwoColumn>
-  </div>
+</div>
 </template>

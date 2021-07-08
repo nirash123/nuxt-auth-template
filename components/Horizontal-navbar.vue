@@ -1,15 +1,21 @@
 <script>
 import {
     menuItems
-} from "./horizontal-menu"
+} from "./horizontal-menu";
 import {
     mapState
-} from "vuex"
+} from "vuex";
 
 /**
  * Horiontal-navbar component
  */
 export default {
+    data() {
+        return {
+            menuItems: menuItems,
+        };
+    },
+    computed: mapState(["layout"]),
     props: {
         type: {
             type: String,
@@ -24,12 +30,6 @@ export default {
             required: true,
         },
     },
-    data() {
-        return {
-            menuItems: menuItems,
-        }
-    },
-    computed: mapState(["layout"]),
     watch: {
         type: {
             immediate: true,
@@ -37,14 +37,14 @@ export default {
                 if (newVal !== oldVal) {
                     switch (newVal) {
                         case "dark":
-                            document.body.setAttribute("data-topbar-color", "dark")
-                            break
+                            document.body.setAttribute("data-topbar-color", "dark");
+                            break;
                         case "light":
-                            document.body.setAttribute("data-topbar-color", "light")
-                            break
+                            document.body.setAttribute("data-topbar-color", "light");
+                            break;
                         default:
-                            document.body.setAttribute("data-topbar-color", "dark")
-                            break
+                            document.body.setAttribute("data-topbar-color", "dark");
+                            break;
                     }
                 }
             },
@@ -55,15 +55,15 @@ export default {
                 if (newVal !== oldVal) {
                     switch (newVal) {
                         case "boxed":
-                            document.body.setAttribute("data-layout-width", "boxed")
-                            break
+                            document.body.setAttribute("data-layout-width", "boxed");
+                            break;
                         case "fluid":
-                            document.body.setAttribute("data-layout-mode", "horizontal")
-                            document.body.removeAttribute("data-layout-width")
-                            break
+                            document.body.setAttribute("data-layout-mode", "horizontal");
+                            document.body.removeAttribute("data-layout-width");
+                            break;
                         default:
-                            document.body.setAttribute("data-layout-mode", "fluid")
-                            break
+                            document.body.setAttribute("data-layout-mode", "fluid");
+                            break;
                     }
                 }
             },
@@ -74,83 +74,83 @@ export default {
                 if (newVal !== oldVal) {
                     switch (newVal) {
                         case "fixed":
-                            document.body.setAttribute("data-layout-menu-position", "fixed")
-                            break
+                            document.body.setAttribute("data-layout-menu-position", "fixed");
+                            break;
                         case "scrollable":
                             document.body.setAttribute(
                                 "data-layout-menu-position",
                                 "scrollable"
-                            )
-                            break
+                            );
+                            break;
                         default:
-                            document.body.setAttribute("data-layout-menu-position", "fixed")
-                            break
+                            document.body.setAttribute("data-layout-menu-position", "fixed");
+                            break;
                     }
                 }
             },
         },
     },
     mounted() {
-        this.activateParentDropdown()
+        this.activateParentDropdown();
 
         this.$router.afterEach((routeTo, routeFrom) => {
-            this.activateParentDropdown()
-        })
+            this.activateParentDropdown();
+        });
     },
     methods: {
         activateParentDropdown() {
-            const resetParent = el => {
-                const parent = el.parentElement
+            const resetParent = (el) => {
+                const parent = el.parentElement;
                 if (parent) {
-                    parent.classList.remove("active")
-                    const parent2 = parent.parentElement
+                    parent.classList.remove("active");
+                    const parent2 = parent.parentElement;
                     if (parent2) {
-                        parent2.classList.remove("active")
-                        const parent3 = parent2.parentElement
-                        parent3.classList.remove("show")
+                        parent2.classList.remove("active");
+                        const parent3 = parent2.parentElement;
+                        parent3.classList.remove("show");
                         if (parent3) {
-                            parent3.classList.remove("active")
-                            const parent4 = parent3.parentElement
+                            parent3.classList.remove("active");
+                            const parent4 = parent3.parentElement;
                             if (parent4) {
-                                parent4.classList.remove("active")
-                                const parent5 = parent4.parentElement
+                                parent4.classList.remove("active");
+                                const parent5 = parent4.parentElement;
                                 if (parent5) {
-                                    parent5.classList.remove("active")
+                                    parent5.classList.remove("active");
                                 }
                             }
                         }
                     }
                 }
-            }
-            var links = document.getElementsByClassName("side-nav-link-ref")
-            var matchingMenuItem = null
+            };
+            var links = document.getElementsByClassName("side-nav-link-ref");
+            var matchingMenuItem = null;
             for (let i = 0; i < links.length; i++) {
                 // reset menu
-                resetParent(links[i])
+                resetParent(links[i]);
             }
             for (var i = 0; i < links.length; i++) {
                 if (window.location.pathname === links[i].pathname) {
-                    matchingMenuItem = links[i]
-                    break
+                    matchingMenuItem = links[i];
+                    break;
                 }
             }
             if (matchingMenuItem) {
-                matchingMenuItem.classList.add("active")
-                var parent = matchingMenuItem.parentElement
+                matchingMenuItem.classList.add("active");
+                var parent = matchingMenuItem.parentElement;
                 if (parent) {
-                    parent.classList.add("active")
-                    const parent2 = parent.parentElement
+                    parent.classList.add("active");
+                    const parent2 = parent.parentElement;
                     if (parent2) {
-                        parent2.classList.add("active")
-                        const parent3 = parent2.parentElement
+                        parent2.classList.add("active");
+                        const parent3 = parent2.parentElement;
                         if (parent3) {
-                            parent3.classList.add("active")
-                            const parent4 = parent3.parentElement
+                            parent3.classList.add("active");
+                            const parent4 = parent3.parentElement;
                             if (parent4) {
-                                parent4.classList.add("active")
-                                const parent5 = parent4.parentElement
+                                parent4.classList.add("active");
+                                const parent5 = parent4.parentElement;
                                 if (parent5) {
-                                    parent5.classList.add("active")
+                                    parent5.classList.add("active");
                                 }
                             }
                         }
@@ -163,122 +163,77 @@ export default {
          * @param item menuItem
          */
         hasItems(item) {
-            return item.subItems !== undefined ? item.subItems.length > 0 : false
+            return item.subItems !== undefined ? item.subItems.length > 0 : false;
         },
         /**
          * Menu clicked show the submenu
          */
         onMenuClick(event) {
-            event.preventDefault()
-            const nextEl = event.target.nextSibling
-            const isHorizontal = document.getElementById("wrapper").hasAttribute("layout")
+            event.preventDefault();
+            const nextEl = event.target.nextSibling;
+            const isHorizontal = document.getElementById("wrapper").hasAttribute("layout");
             if (isHorizontal) {
-                nextEl.parentElement.classList.add("show")
-                nextEl.nextSibling.classList.add("show")
+                nextEl.parentElement.classList.add("show");
+                nextEl.nextSibling.classList.add("show");
             } else {
                 if (nextEl && nextEl.classList && !nextEl.classList.contains("show")) {
-                    const parentEl = event.target.parentNode
+                    const parentEl = event.target.parentNode;
                     if (parentEl) {
-                        parentEl.classList.remove("show")
+                        parentEl.classList.remove("show");
                     }
-                    nextEl.classList.add("show")
+                    nextEl.classList.add("show");
                 } else if (nextEl && nextEl.classList) {
-                    nextEl.classList.remove("show")
+                    nextEl.classList.remove("show");
                 }
 
             }
-            return false
+            return false;
         },
     },
-}
+};
 </script>
 
 <template>
-  <div>
+<div>
     <div class="topnav">
-      <div class="container-fluid">
-        <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
-          <div
-            id="topnav-menu-content"
-            class="collapse navbar-collapse"
-          >
-            <ul class="navbar-nav">
-              <li
-                v-for="(item, index) of menuItems"
-                :key="index"
-                class="nav-item dropdown"
-              >
-                <nuxt-link
-                  v-if="!item.subItems"
-                  tag="a"
-                  :to="item.link"
-                  class="nav-link dropdown-toggle arrow-none side-nav-link-ref"
-                >
-                  <i :class="`${item.icon} mr-1`" />
-                  {{ $t(item.label) }}
-                </nuxt-link>
+        <div class="container-fluid">
+            <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
+                <div class="collapse navbar-collapse" id="topnav-menu-content">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown" v-for="(item, index) of menuItems" :key="index">
+                            <nuxt-link tag="a" v-if="!item.subItems" :to="item.link" class="nav-link dropdown-toggle arrow-none side-nav-link-ref">
+                                <i :class="`${item.icon} mr-1`"></i>
+                                {{ $t(item.label)}}
+                            </nuxt-link>
 
-                <a
-                  v-if="item.subItems"
-                  id="topnav-components"
-                  class="nav-link dropdown-toggle arrow-none"
-                  href="javascript: void(0);"
-                  role="button"
-                  @click="onMenuClick"
-                >
-                  <i :class="`${item.icon} mr-1`" />
-                  {{ $t(item.label) }}
-                  <div class="arrow-down" />
-                </a>
-                <div
-                  v-if="hasItems(item)"
-                  class="dropdown-menu row"
-                  aria-labelledby="topnav-dashboard"
-                >
-                  <template v-for="(subitem, index2) of item.subItems">
-                    <nuxt-link
-                      v-if="!hasItems(subitem)"
-                      :key="index2"
-                      class="col dropdown-item side-nav-link-ref"
-                      :to="subitem.link"
-                    >
-                      {{ $t(subitem.label) }}
-                    </nuxt-link>
-                    <div
-                      v-if="hasItems(subitem)"
-                      :key="index2"
-                      class="dropdown"
-                    >
-                      <a
-                        class="dropdown-item dropdown-toggle"
-                        href="javascript: void(0);"
-                        @click="onMenuClick"
-                      >
-                        {{ $t(subitem.label) }}
-                        <div class="arrow-down" />
-                      </a>
-                      <div class="dropdown-menu">
-                        <nuxt-link
-                          v-for="(subSubitem, index3) of subitem.subItems"
-                          :key="index3"
-                          :to="subSubitem.link"
-                          class="dropdown-item side-nav-link-ref"
-                        >
-                          {{ $t(subSubitem.label) }}
-                        </nuxt-link>
-                      </div>
-                    </div>
-                  </template>
+                            <a v-if="item.subItems" class="nav-link dropdown-toggle arrow-none" @click="onMenuClick" href="javascript: void(0);" id="topnav-components" role="button">
+                                <i :class="`${item.icon} mr-1`"></i>
+                                {{$t(item.label)}}
+                                <div class="arrow-down"></div>
+                            </a>
+                            <div class="dropdown-menu row" aria-labelledby="topnav-dashboard" v-if="hasItems(item)">
+                                <template v-for="(subitem, index) of item.subItems">
+                                    <nuxt-link :key="index" class="col dropdown-item side-nav-link-ref" v-if="!hasItems(subitem)" :to="subitem.link">{{$t(subitem.label)}}</nuxt-link>
+                                    <div class="dropdown" v-if="hasItems(subitem)" :key="index">
+                                        <a class="dropdown-item dropdown-toggle" href="javascript: void(0);" @click="onMenuClick">
+                                            {{ $t(subitem.label) }}
+                                            <div class="arrow-down"></div>
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <nuxt-link v-for="(subSubitem, index) of subitem.subItems" :key="index" :to="subSubitem.link" class="dropdown-item side-nav-link-ref">{{ $t(subSubitem.label) }}</nuxt-link>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </li>
+                    </ul>
+                    <!-- end navbar-->
                 </div>
-              </li>
-            </ul>
-            <!-- end navbar-->
-          </div>
-          <!-- end .collapsed-->
-        </nav>
-      </div>
-      <!-- end container-fluid -->
+                <!-- end .collapsed-->
+            </nav>
+        </div>
+        <!-- end container-fluid -->
     </div>
     <!-- end topnav-->
-  </div>
+</div>
 </template>

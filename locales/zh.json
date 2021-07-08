@@ -99,8 +99,11 @@
       "name": {
         "text": "Nik Patel",
         "list": {
+          "greet": "歡迎 !",
           "account": "我的帳戶",
+          "mywallet": "我的錢包",
           "settings": "設定值",
+          "lockscreen": "鎖屏",
           "logout": "登出"
         }
       }
@@ -109,15 +112,6 @@
   "menuitems": {
     "navigation": {
       "text": "導航"
-    },
-    "education": {
-      "text": "教育内容"
-    },
-    "sessions": {
-      "text": "会话"
-    },
-    "account_settings": {
-      "text": "帐号设定"
     },
     "dashboard": {
       "text": "儀表板",

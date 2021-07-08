@@ -12,14 +12,16 @@ export default {
 </script>
 
 <template>
-  <div>
+<div>
     <div class="account-pages mt-5 mb-5">
-      <div class="container">
-        <Nuxt />
-      </div>
-      <!-- end container -->
+        <div class="container">
+            <Nuxt />
+        </div>
+        <!-- end container -->
     </div>
     <!-- end page -->
-    
-  </div>
+    <footer class="footer footer-alt">
+        {{new Date().getFullYear()}} &copy; Minton theme by <a href="">Themesbrand</a>
+    </footer>
+</div>
 </template>

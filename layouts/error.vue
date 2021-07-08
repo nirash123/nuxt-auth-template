@@ -1,23 +1,23 @@
 <script>
-import Error404 from "~/pages/extras/404.vue"
+import Error404 from "~/pages/extras/404.vue";
 
 /**
  * Error layout
  */
 export default {
-    name: "NuxtError",
+    name: "nuxt-error",
     components: {
         Error404
     },
-    layout: 'auth',
     data() {
-        return {}
-    }
-}
+        return {};
+    },
+    layout: 'auth'
+};
 </script>
 
 <template>
-  <div class="nuxt-error">
+<div class="nuxt-error">
     <Error404 />
-  </div>
+</div>
 </template>

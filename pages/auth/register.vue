@@ -1,252 +1,118 @@
-<template>
-  <!-- Register  form -->
-  <div class="row justify-content-center">
-    <div class="col-md-8 col-lg-6 col-xl-5 mt-5">
-      <div class="card">
-        <div class="card-body p-4">
-          <div class="text-center w-75 m-auto">
-            <div class="auth-logo">
-              <div class="logo logo-dark text-center">
-                <span class="logo-lg">
-                  <img
-                    src="~/assets/images/favicon.png"
-                    width="50"
-                  >
-                </span>
-                <span class="logo-lg mt-2">
-                  <img
-                    src="~/assets/images/logo-new.png"
-                    width="200"
-                  >
-                </span>
-              </div>
-            </div>
-            <p class="text-muted mb-4 mt-3">
-              Don't have an account? Create your own account, it takes less than a minute
-            </p>
-          </div>
-          <!-- form -->
-          <b-form @submit.prevent="register">
-
-            <!-- first name-->
-            <b-form-group label-for="input-first_name">
-              <template #label>
-                First Name
-              </template>
-              <b-form-input
-                id="input-first_name"
-                v-model="form.first_name"
-                type="text"
-                :state="errors && errors.first_name ? false : null"
-                placeholder="Enter First Name"
-              />
-              <b-form-invalid-feedback
-                v-if="errors && errors.first_name"
-                id="input-first_name-feedback"
-              >
-                {{ errors.first_name[0] }}
-              </b-form-invalid-feedback>
-            </b-form-group>
-
-            <!-- last name-->
-            <b-form-group label-for="input-last_name">
-              <template #label>
-                Last Name
-              </template>
-              <b-form-input
-                id="input-last_name"
-                v-model="form.last_name"
-                type="text"
-                :state="errors && errors.last_name ? false : null"
-                placeholder="Enter Last Name"
-              />
-              <b-form-invalid-feedback
-                v-if="errors && errors.last_name"
-                id="input-last_name-feedback"
-              >
-                {{ errors.last_name[0] }}
-              </b-form-invalid-feedback>
-            </b-form-group>
-
-
-            <!-- email address-->
-            <b-form-group label-for="input-email">
-              <template #label>
-                Email
-              </template>
-              <b-form-input
-                id="input-email"
-                v-model="form.email"
-                type="email"
-                :state="errors && errors.email ? false : null"
-                placeholder="Enter Email"
-              />
-              <b-form-invalid-feedback
-                v-if="errors && errors.email"
-                id="input-email-feedback"
-              >
-                {{ errors.email[0] }}
-              </b-form-invalid-feedback>
-            </b-form-group>
-
-            <!-- password -->
-            <b-form-group label-for="input-password">
-              <template #label>
-                Password
-              </template>
-              <b-form-input
-                id="input-password"
-                v-model="form.password"
-                type="password"
-                :state="errors && errors.password ? false : null"
-                placeholder="Enter password"
-              />
-              <b-form-invalid-feedback
-                v-if="errors && errors.password"
-                id="input-password-feedback"
-              >
-                {{ errors.password[0] }}
-              </b-form-invalid-feedback>
-            </b-form-group>
-
-            <!-- Comfirm password -->
-            <b-form-group label-for="password_confirmation">
-              <template #label>
-                Confirmed password <span class="text-danger">*</span>
-              </template>
-              <b-form-input
-                id="password_confirmation"
-                v-model="form.password_confirmation"
-                type="password"
-                :state="errors && errors.name ? false : null"
-                placeholder="Enter password confirmation"
-                required
-              />
-              <b-form-invalid-feedback
-                v-if="errors && errors.password_confirmation"
-                id="password_confirmation-feedback"
-              >
-                {{ errors.password_confirmation[0] }}
-              </b-form-invalid-feedback>
-            </b-form-group>
-
-            <!-- checkbox  -->
-            <div class="form-group mb-3">
-              <div class="custom-control custom-checkbox">
-                <input
-                  id="checkbox-login"
-                  type="checkbox"
-                  class="custom-control-input"
-                  checked
-                >
-                <label
-                  class="custom-control-label"
-                  for="checkbox-login"
-                >I accept Terms and Conditions</label>
-              </div>
-            </div>
-
-            <!-- login button -->
-            <div class="form-group mb-0 text-center">
-              <button
-                class="btn btn-primary btn-block"
-                type="submit"
-              >
-                Sign Up
-              </button>
-            </div>
-
-            <!-- social media -->
-            <div class="text-center">
-              <ul class="social-list list-inline mt-3 mb-0">
-                <li class="list-inline-item">
-                  <a
-                    href="javascript: void(0);"
-                    class="social-list-item border-purple text-purple"
-                  >
-                    <i class="mdi mdi-facebook" />
-                  </a>
-                </li>
-                <li class="list-inline-item">
-                  <a
-                    href="javascript: void(0);"
-                    class="social-list-item border-danger text-danger"
-                  >
-                    <i class="mdi mdi-google" />
-                  </a>
-                </li>
-                <li class="list-inline-item">
-                  <a
-                    href="javascript: void(0);"
-                    class="social-list-item border-info text-info"
-                  >
-                    <i class="mdi mdi-twitter" />
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </b-form>
-        </div>
-      </div>
-
-      <!-- sign in  -->
-      <div class="row mt-3">
-        <div class="col-12 text-center">
-          <p class="text-muted">
-            Already have account?
-            <nuxt-link
-              to="/"
-              class="text-primary font-weight-medium ml-1"
-            >
-              Sign In
-            </nuxt-link>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
-
 <script>
+/**
+ * Register component
+ */
 export default {
-  layout: "auth",
-  asyncData({$auth, redirect}){
-    if ($auth.loggedIn) {
-      redirect('/education-content')
-    }
-  },
-  data(){
-    return{
-      errors:{},
-      form: {
-          first_name: '',
-          last_name: '',
-          email: '',
-          password: '',
-          password_confirmation: '',
-      }
-    }
-  },
-  methods:{
-    async register() {
-
-      try{
-        await this.$axios.get('sanctum/csrf-cookie')
-        await this.$axios.post('register',this.form)
-        // 
-          await this.$auth.loginWith('laravelSanctum' , {
-          data: this.form
-        })
-        await this.$router.replace({path:'/education-content'})
-      }catch (error) {
-        console.log(error)
-        if(error.response.status === 422) {
-          this.errors = error.response.data.errors
-        }
-      }
-    }
-  },
-}
+    head() {
+        return {
+            title: `Register | Minton - Nuxtjs Responsive Admin Dashboard Template`,
+        };
+    },
+    data() {
+        return {};
+    },
+    layout: "auth",
+};
 </script>
 
+<template>
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6 col-xl-5">
+        <div class="card">
+            <div class="card-body p-4">
+                <div class="text-center w-75 m-auto">
+                    <div class="auth-logo">
+                        <nuxt-link to="/" class="logo logo-dark text-center">
+                            <span class="logo-lg">
+                                <img src="~/assets/images/logo-dark.png" alt height="22" />
+                            </span>
+                        </nuxt-link>
+
+                        <nuxt-link to="/" class="logo logo-light text-center">
+                            <span class="logo-lg">
+                                <img src="~/assets/images/logo-light.png" alt height="22" />
+                            </span>
+                        </nuxt-link>
+                    </div>
+                    <p class="text-muted mb-4 mt-3">Don't have an account? Create your own account, it takes less than a minute</p>
+                </div>
+
+                <form action="#">
+                    <div class="form-group">
+                        <label for="fullname">Full Name</label>
+                        <input class="form-control" type="text" id="fullname" placeholder="Enter your name" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="emailaddress">Email address</label>
+                        <input class="form-control" type="email" id="emailaddress" required placeholder="Enter your email" />
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-group input-group-merge">
+                            <input type="password" id="password" class="form-control" placeholder="Enter your password" />
+                            <div class="input-group-append" data-password="false">
+                                <div class="input-group-text">
+                                    <span class="password-eye"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="checkbox-signup" />
+                            <label class="custom-control-label" for="checkbox-signup">
+                                I accept
+                                <a href="javascript: void(0);" class="text-dark">Terms and Conditions</a>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group mb-0 text-center">
+                        <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
+                    </div>
+                </form>
+
+                <div class="text-center">
+                    <h5 class="mt-3 text-muted">Sign Up using</h5>
+                    <ul class="social-list list-inline mt-3 mb-0">
+                        <li class="list-inline-item">
+                            <a href="javascript: void(0);" class="social-list-item border-purple text-purple">
+                                <i class="mdi mdi-facebook"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="javascript: void(0);" class="social-list-item border-danger text-danger">
+                                <i class="mdi mdi-google"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="javascript: void(0);" class="social-list-item border-info text-info">
+                                <i class="mdi mdi-twitter"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="javascript: void(0);" class="social-list-item border-secondary text-secondary">
+                                <i class="mdi mdi-github"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- end card-body -->
+        </div>
+        <!-- end card -->
+
+        <div class="row mt-3">
+            <div class="col-12 text-center">
+                <p class="text-muted">
+                    Already have account?
+                    <nuxt-link to="/auth/login" class="text-primary font-weight-medium ml-1">Sign In</nuxt-link>
+                </p>
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+</template>

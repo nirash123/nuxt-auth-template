@@ -99,8 +99,11 @@
       "name": {
         "text": "Nik Patel",
         "list": {
+          "greet": "Bienvenidos !",
           "account": "Mi cuenta",
+          "mywallet": "Mi billetera",
           "settings": "Configuraciones",
+          "lockscreen": "Bloquear pantalla",
           "logout": "Cerrar sesión"
         }
       }
@@ -109,15 +112,6 @@
   "menuitems": {
     "navigation": {
       "text": "Navegación"
-    },
-    "education": {
-      "text": "Contenido educativo"
-    },
-    "sessions": {
-      "text": "Sesiones"
-    },
-    "account_settings": {
-      "text": "Configuraciones de la cuenta"
     },
     "dashboard": {
       "text": "Tablero",
